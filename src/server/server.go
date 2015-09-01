@@ -4,17 +4,32 @@ import (
 	"html/template"
 	"net/http"
 	"regexp"
+	"fmt"
 )
-var templates = template.Must(template.ParseFiles("../web/html_templates/edit.html", "web/html_templates/view.html"))
+
+type Server_Config struct {
+	html_templates string
+}
+
+type Config struct {
+	Server_Config
+}
+
+var templates = template.Must(template.ParseFiles("../web/html_templates/edit.html", "../web/html_templates/view.html"))
 var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 
 
 func main() {
-	http.HandleFunc("/view/", makeHandler(viewHandler))
+/*	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
 	http.HandleFunc("/", redirectHome)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", nil)*/
+	config := Config{}
+	ParseJSON("server_config.json", &config)
+	fmt.Printf("%T\n", config.html_templates)
+	fmt.Printf(config.html_templates)
+
 }
 
 func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc{
