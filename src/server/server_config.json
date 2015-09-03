@@ -1,3 +1,4 @@
 {
-  "ServerConfig": {"templates_path": "../web/html_templates"}
+  "html_templates": "../web/html_templates/",
+  "port" : "8080"
 }

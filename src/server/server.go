@@ -4,32 +4,37 @@ import (
 	"html/template"
 	"net/http"
 	"regexp"
-	"fmt"
 )
 
 type Server_Config struct {
-	html_templates string
+	Html_templates string
+	Port string
 }
 
-type Config struct {
-	Server_Config
+ var templates *template.Template
+ var validPath *regexp.Regexp
+ var config  = Server_Config{}
+
+func init() {
+	//Parse config file
+	ParseJSON("server_config.json", config)
+	println(config.Html_templates)
+
+	//Set templates
+	templates = template.Must(template.ParseFiles("../web/html_templates/edit.html", "../web/html_templates/view.html"))
+	validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 }
-
-var templates = template.Must(template.ParseFiles("../web/html_templates/edit.html", "../web/html_templates/view.html"))
-var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
-
 
 func main() {
-/*	http.HandleFunc("/view/", makeHandler(viewHandler))
+
+}
+
+func startServerHandlers(){
+	http.HandleFunc("/view/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))
 	http.HandleFunc("/", redirectHome)
-	http.ListenAndServe(":8080", nil)*/
-	config := Config{}
-	ParseJSON("server_config.json", &config)
-	fmt.Printf("%T\n", config.html_templates)
-	fmt.Printf(config.html_templates)
-
+	http.ListenAndServe(":8080", nil)
 }
 
 func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.HandlerFunc{
@@ -43,8 +48,9 @@ func makeHandler(fn func (http.ResponseWriter, *http.Request, string)) http.Hand
 	}
 }
 
-func redirectHome(){
-
+func redirectHome(http.ResponseWriter, *http.Request){
+//TODO figure out redirect home stuff
+	
 }
 
 func editHandler(writer http.ResponseWriter, r *http.Request, title string){
