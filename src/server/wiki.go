@@ -1,31 +1,39 @@
 package main
-import (
+import "strconv"
+/*import (
 	"io/ioutil"
-)
 
-type Page struct {
+)*/
+
+type Entry struct {
+	entryID int
 	Title string
-	Body []byte
+	Body string
+	Author string
+
 }
 
-func NewPage(Title , Body string) *Page{
-	return &Page{Title: Title, Body: []byte(Body)}
-}
-
-
-func (p *Page) save() error {
-	filename := p.Title + ".txt"
-	return ioutil.WriteFile(filename, p.Body, 0600)
+func NewEntry(Title , Body string, Author string) *Entry{
+	return &Entry{Title: Title, Body: Body, Author: Author}
 }
 
 
-func loadPage(title string) (*Page, error) {
-	filename := title + ".txt"
-	body, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return nil, err
+func (p *Entry) save() {
+	getEntry(1)
+}
+
+
+func loadEntry(id int) (*Entry, error) {
+
+	return getEntry(id), nil
+}
+
+func loadEntryString(id string) (*Entry, error) {
+	i, err := strconv.Atoi(id)
+	if(err != nil){
+		panic(err.Error());
 	}
 
-	return &Page{Title: title, Body: body}, nil
+	return getEntry(i), nil
 }
 

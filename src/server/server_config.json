@@ -1,4 +1,7 @@
 {
-  "html_templates": "../web/html_templates/",
+  "html_templates": "../web/html_templates/*.html",
+  "css_loc": "../web/css/*.css",
+  "javascript_loc": "../web/js",
+  "static_html": "../html_static",
   "port" : "8080"
 }
