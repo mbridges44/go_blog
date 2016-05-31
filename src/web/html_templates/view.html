@@ -6,15 +6,15 @@
     <title>{{.Title}}</title>
 
     <!-- Bootstrap Core CSS file -->
-    <link rel="stylesheet" type="text/css" href="../web/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/html_static/css/bootstrap.css">
 
     <!-- Override CSS file - add your own CSS rules -->
-    <link rel="stylesheet" type="application/javascript" href="../web/css/styles.css">
+    <link rel="stylesheet" type="application/javascript" href="/html_static/css/styles.css">
 
     <!-- Conditional comment containing JS files for IE6 - 8 -->
     <!--[if lt IE 9]>
-    <script src="../js/html5.js"></script>
-    <script src="../js/respond.min.js"></script>
+    <script src="/html_static/css/html5.js"></script>
+    <script src="/html_static/css/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -25,25 +25,9 @@
 
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Bridges Goes to Sea</a>
+            <a class="navbar-brand" href="#">GoBlog</a>
         </div>
         <!-- /.navbar-header -->
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Nav item 1</a></li>
-                <li><a href="#">Nav item 2</a></li>
-                <li><a href="#">Nav item 3</a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
 </nav>
@@ -55,7 +39,7 @@
         <div class="col-sm-12">
             <div class="page-header">
                 <h1>{{.Title}}</h1>
-                <p>Posted by <a href="#">{{.PosterName}}</a> on <span class="glyphicon glyphicon-time"></span> 12 January 2015 10:00 am</p>
+                <p>Posted by <a href="#">{{.Author}}</a> on <span class="glyphicon glyphicon-time"></span> 12 January 2015 10:00 am</p>
             </div>
         </div>
     </div>
@@ -65,19 +49,19 @@
 
     <div class="row">
         <div class="col-sm-8">
-            {{.Content}}
+            {{.Body}}
 
-            <!-- Comments -->
-            <h3>Comments</h3>
+
             <div class="well">
+                {{range $comment := .Comments }}
                 <div class="media">
                     <div class="media-left">
                         <img src="http://placehold.it/70x70" alt="">
                     </div>
                     <div class="media-body">
-                        <h4 class="margin-t-0"><a href="#">Mayahuel Rodriguez</a></h4>
-                        <p><a href="#">12 January 2015 11:13 pm</a></p>
-                        <p>Lorem ipsum dolor sit amet consect etuer adipi scing elit sed diam nonummy nibh euismod tinunt ut laoreet dolore magna aliquam erat volut</p>
+                        <h4 class="margin-t-0"><a href="#"{{$comment.AuthorFirst}} {{$comment.AuthorLast}}></a></h4>
+                        <p><a href="#">{{$comment.AuthorFirst}} {{$comment.AuthorLast}}</a></p>
+                        <p>{{$comment.CommentText}}</p>
                         <p>
                             <button class="btn btn-sm btn-default">
                                 <span class="glyphicon glyphicon-thumbs-up"></span> Upvote
@@ -91,56 +75,11 @@
                         </p>
                     </div>
                 </div>
+                {{end}}
             </div>
 
-            <div class="well">
-                <div class="media">
-                    <div class="media-left">
-                        <img src="http://placehold.it/70x70" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="margin-t-0"><a href="#">Mayahuel Rodriguez</a></h4>
-                        <p><a href="#">12 January 2015 11:13 pm</a></p>
-                        <p>Lorem ipsum dolor sit amet consect etuer adipi scing elit sed diam nonummy nibh euismod tinunt ut laoreet dolore magna aliquam erat volut</p>
-                        <p>
-                            <button class="btn btn-sm btn-default">
-                                <span class="glyphicon glyphicon-thumbs-up"></span> Upvote
-                            </button>
-                            <button class="btn btn-sm btn-default">
-                                <span class="glyphicon glyphicon-thumbs-down"></span> Downvote
-                            </button>
-                            <button class="btn btn-sm btn-default">
-                                <span class="glyphicon glyphicon-comment"></span> Reply
-                            </button>
-                        </p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="well">
-                <div class="media">
-                    <div class="media-left">
-                        <img src="http://placehold.it/70x70" alt="">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="margin-t-0"><a href="#">Mayahuel Rodriguez</a></h4>
-                        <p><a href="#">12 January 2015 11:13 pm</a></p>
-                        <p>Lorem ipsum dolor sit amet consect etuer adipi scing elit sed diam nonummy nibh euismod tinunt ut laoreet dolore magna aliquam erat volut</p>
-                        <p>
-                            <button class="btn btn-sm btn-default">
-                                <span class="glyphicon glyphicon-thumbs-up"></span> Upvote
-                            </button>
-                            <button class="btn btn-sm btn-default">
-                                <span class="glyphicon glyphicon-thumbs-down"></span> Downvote
-                            </button>
-                            <button class="btn btn-sm btn-default">
-                                <span class="glyphicon glyphicon-comment"></span> Reply
-                            </button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <hr>
+
 
             <!--
             &lt;!&ndash; Comment form &ndash;&gt;
@@ -176,8 +115,8 @@
             </nav>
 -->
         </div>
-        <div class="col-sm-4">
-            <!-- Search -->
+        <!--<div class="col-sm-4">
+            &lt;!&ndash; Search &ndash;&gt;
             <div class="well">
                 <h4 class="margin-t-0">Search</h4>
                 <form action="#">
@@ -194,14 +133,14 @@
                 </form>
             </div>
 
-            <!-- list group -->
+            &lt;!&ndash; list group &ndash;&gt;
             <div class="list-group margin-b-3">
                 <a href="#" class="active list-group-item">Category 1</a>
                 <a href="#" class="list-group-item">Category 2</a>
                 <a href="#" class="list-group-item">Category 3</a>
             </div>
 
-            <!-- Panel -->
+            &lt;!&ndash; Panel &ndash;&gt;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">Sidebar panel widget</h4>
@@ -211,7 +150,7 @@
                 </div>
             </div>
 
-            <!-- Panel -->
+            &lt;!&ndash; Panel &ndash;&gt;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">Sidebar panel widget</h4>
@@ -221,7 +160,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>-->
     </div>
     <!-- /.row -->
 
@@ -237,10 +176,10 @@
 <!-- /.container-fluid -->
 
 <!-- JQuery scripts -->
-<script src="../js/jquery-1.11.2.min.js"></script>
+<script src="/html_static/js/jquery-1.11.2.min.js"></script>
 
 <!-- Bootstrap Core scripts -->
-<script src="../js/bootstrap.min.js"></script>
+<script src="/html_static/js/bootstrap.min.js"></script>
 </body>
 </html>
 

@@ -9,7 +9,12 @@ type content_handler struct {
 }
 
 func (contentHandler *content_handler) ServeHTTP(w http.ResponseWriter, r *http.Request){
-	css_bytes, _ := ioutil.ReadFile(".." + r.RequestURI)
+	//REMOVE HARDCODING
+	content_bytes, err := ioutil.ReadFile("src/web" + r.RequestURI)
+	if(err != nil){
+		panic(err.Error());
+	}
+
 	w.Header().Set("Content-Type", contentHandler.Content_type)
-	w.Write(css_bytes)
+	w.Write(content_bytes)
 }

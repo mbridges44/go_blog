@@ -1,7 +1,7 @@
 {
-  "html_templates": "../web/html_templates/*.html",
-  "css_loc": "../web/css/*.css",
-  "javascript_loc": "../web/js",
-  "static_html": "../html_static",
+  "html_templates": "src/web/html_templates/*.html",
+  "css_loc": "src/web/html_static/css",
+  "javascript_loc": "src/web/html_static/js",
+  "static_html": "src/web/html_static",
   "port" : "8080"
 }

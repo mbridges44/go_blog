@@ -6,15 +6,18 @@
     <title>{{.Title}}</title>
 
     <!-- Bootstrap Core CSS file -->
-    <link rel="stylesheet" href="../web/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/html_static/css/bootstrap.min.css">
 
     <!-- Override CSS file - add your own CSS rules -->
-    <link rel="stylesheet" href="..web/css/styles.css">
+    <link rel="stylesheet" href="/html_static/css/styles.css">
 
     <!-- Conditional comment containing JS files for IE6 - 8 -->
     <!--[if lt IE 9]>
-    <script src="../js/html5.js"></script>
-    <script src="../js/respond.min.js"></script>
+    <script src="/html_static/js/html5.js"></script>
+
+    <script src="/lib/ckeditor/ckeditor.js"></script>
+
+    <script src="/html_static/js/respond.min.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -31,18 +34,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Bridges Goes to Sea</a>
+            <a class="navbar-brand" href="#">GoBlog</a>
         </div>
         <!-- /.navbar-header -->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Nav item 1</a></li>
-                <li><a href="#">Nav item 2</a></li>
-                <li><a href="#">Nav item 3</a></li>
-            </ul>
-        </div>
+
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
@@ -64,6 +61,16 @@
 
     <div class="row">
         <div class="col-sm-8">
+            <form>
+                <textarea name = "editor1" id="editor1" rows ="10" cols ="80">
+                    Sample text area
+                </textarea>
+                <script>
+                    // Replace the <textarea id="editor1"> with a CKEditor
+                    // instance, using default configuration.
+                    CKEDITOR.replace( 'editor1' );
+                </script>
+            </form>
 
 
         </div>
@@ -128,10 +135,10 @@
 <!-- /.container-fluid -->
 
 <!-- JQuery scripts -->
-<script src="../js/jquery-1.11.2.min.js"></script>
+<script src="/html_static/js/jquery-1.11.2.min.js"></script>
 
 <!-- Bootstrap Core scripts -->
-<script src="../js/bootstrap.min.js"></script>
+<script src="/html_static/js/bootstrap.min.js"></script>
 </body>
 </html>
 
